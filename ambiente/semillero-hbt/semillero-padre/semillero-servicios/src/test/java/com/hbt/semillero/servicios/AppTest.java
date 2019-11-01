@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.hbt.semillero.entidades.EstadoEnum;
+import com.hbt.semillero.pojo.GestionarComicPOJO;
 
 public class AppTest {
 
@@ -75,7 +76,7 @@ public class AppTest {
 	 * @author Yuliana
 	 *
 	 */
-	@Test
+	@Test(enabled=false)
 	public void pruebaEnumeradoEstado() {
 		//Instanciar un enum de la clase EstadoEnum
 		EstadoEnum estadoActivo= EstadoEnum.ACTIVO;
@@ -98,4 +99,23 @@ public class AppTest {
 		EstadoEnum[] listEstados =  EstadoEnum.values();
 	}
 	
+	
+	@Test
+	public void crearComicDTOTest() {
+		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
+		gestionarComicPOJO.crearComicDTO();
+		Assert.assertNotNull(gestionarComicPOJO.getListaComics());
+		
+	}
+	
+	@Test
+	public void crearComicDTOTestParametros() {
+		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
+
+	}
+	
+	@Test
+	public void agregarComicDTOLista() {
+		
+	}
 }
