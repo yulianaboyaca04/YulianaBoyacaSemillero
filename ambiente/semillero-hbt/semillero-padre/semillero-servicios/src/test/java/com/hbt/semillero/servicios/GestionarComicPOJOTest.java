@@ -14,13 +14,20 @@ import com.hbt.semillero.entidades.EstadoEnum;
 import com.hbt.semillero.pojo.GestionarComicPOJO;
 
 /**
- * <b>Descripción:<b> Clase que determina
+ * <b>Descripción:<b> Clase que contiene las pruebas de la clase gestionarComicPOJO
  * <b>Caso de Uso:<b> 
  * @author Yuliana
  * @version 
  */
 public class GestionarComicPOJOTest {
 
+	/**
+	 * 
+	 * Metodo encargado de realizar las pruebas para el metodo que se encarga de crear comic
+	 * <b>Caso de Uso</b>
+	 * @author Yuliana
+	 *
+	 */
 	@Test
 	public void crearComicDTOTest() {
 		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
@@ -53,7 +60,7 @@ public class GestionarComicPOJOTest {
 
 		gestionarComicPOJO.agregarComicDtoLista(comicDTO);
 		
-		//prueba para validar que el elemento numero 2
+		//prueba para validar que el elemento numero 2 fue agregado
 		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() == 2);
 
 		comicDTO = new ComicDTO();
@@ -76,6 +83,7 @@ public class GestionarComicPOJOTest {
 		//prueba para validar que se agrego el elemento numero 3
 		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() == 3);
 
+		//cambiar el nombre al comic con id numero 2
 		String nuevoNombre = "Capitan America Corps 1-5 USA";
 		gestionarComicPOJO.modificarComicDTO("2", nuevoNombre);
 		
@@ -87,6 +95,5 @@ public class GestionarComicPOJOTest {
 		
 		//prueba para validar que se elimino un elemento de la lista 
 		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() == 2);
-
 	}
 }

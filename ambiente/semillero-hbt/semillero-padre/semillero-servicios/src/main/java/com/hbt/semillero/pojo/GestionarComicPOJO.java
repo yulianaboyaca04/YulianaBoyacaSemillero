@@ -58,6 +58,9 @@ public class GestionarComicPOJO {
 	 * @param comicDTO
 	 */
 	public void agregarComicDtoLista(ComicDTO comicDTO) {
+		if (listaComics == null) {
+			listaComics = new ArrayList<ComicDTO>();
+		}
 		listaComics.add(comicDTO);
 	}
 
