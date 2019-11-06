@@ -26,6 +26,7 @@ export class InformacionPersonalComponent implements OnInit {
   */
   ngOnInit() {
     this.nombre = "Mary Yuliana Boyacá - Tunja";
+    let nombreInstructor;
   }
 
 }

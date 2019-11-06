@@ -1,0 +1,14 @@
+<br>
+<h5><strong>Lista de revistas:</strong></h5>
+<pre>{{listaRevistas | json}}</pre>
+<h5><strong>Eliminar Revista de la posición 3:</strong></h5>
+<button class="primary" (click)="eliminarRevista(3)" name="listaRevistas">Eliminar revista</button>
+<div>
+    <br>
+    <h6 *ngIf="mostrarMensaje">{{mensaje}}</h6>
+    <h6 *ngIf="!mostrarMensaje && mensaje === ''"> No existe elemento en esa posicion</h6>
+</div>
+<h5><strong>Lista de revistas:</strong></h5>
+<li *ngFor="let revista of listaRevistas">
+    {{revista.nombre}}
+</li>

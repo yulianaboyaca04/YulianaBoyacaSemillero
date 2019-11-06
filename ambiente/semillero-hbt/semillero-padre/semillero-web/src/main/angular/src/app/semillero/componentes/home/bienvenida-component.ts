@@ -11,4 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BienvenidaComponent {
 
+  private urlImagen: string;
+  
+  ngOnInit(): void {
+    this.urlImagen = "https://www.elempleo.com/sitios-empresariales/colombia/heinsohn-business-technology/img/elempleo-02.jpg";
+  }
+
+  public ejecucionEventoClick(parametroEvento: any): void{
+    alert("Hola " + parametroEvento);
+  } 
 }

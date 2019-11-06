@@ -11,11 +11,13 @@ import { GestionarComicComponent } from './semillero/componentes/gestionarComic/
 import { MenuComponent } from './semillero/componentes/menu/menu-component';
 import { BienvenidaComponent } from './semillero/componentes/home/bienvenida-component';
 import { InformacionPersonalComponent } from './semillero/componentes/informacionPersonal/informacion-personal.component';
-
+import { CrearPersonaComponent } from './semillero/componentes/crear-persona/crear-persona-component';
+import { GestionarRevistaComponent } from './semillero/componentes/gestionar-revista/gestionar-revista.component';
 
 // DTOs
 export { ComicDTO } from './semillero/dto/comic.dto';
 export { ResultadoDTO } from './semillero/dto/resultado.dto';
+export { RevistaDTO } from './semillero/dto/revista.dto';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ export { ResultadoDTO } from './semillero/dto/resultado.dto';
     MenuComponent,
     BienvenidaComponent,
     GestionarComicComponent,
-    InformacionPersonalComponent
+    InformacionPersonalComponent,
+    CrearPersonaComponent,
+    GestionarRevistaComponent
   ],
   imports: [
     BrowserModule,
