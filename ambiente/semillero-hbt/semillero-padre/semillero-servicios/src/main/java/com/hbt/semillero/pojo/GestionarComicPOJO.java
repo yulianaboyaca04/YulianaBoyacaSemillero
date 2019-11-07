@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.entidades.EstadoEnum;
+import com.hbt.semillero.entidades.TematicaEnum;
 
 /**
  * <b>Descripción:<b> Clase que determina <b>Caso de Uso:<b>
@@ -41,7 +42,7 @@ public class GestionarComicPOJO {
 	 * @param cantidad
 	 * @return
 	 */
-	public ComicDTO crearComicDTO(String id, String nombre, String editorial, String tematica, String coleccion,
+	public ComicDTO crearComicDTO(String id, String nombre, String editorial, TematicaEnum tematica, String coleccion,
 			int  numeroPaginas, BigDecimal precio, String autores, Boolean color, LocalDate fechaVenta,
 			EstadoEnum estado, Long cantidad) {
 		ComicDTO comicDTO =  new ComicDTO(id, nombre, editorial, tematica, coleccion, numeroPaginas, precio, autores, 
@@ -76,14 +77,14 @@ public class GestionarComicPOJO {
 		comicDTO.setId("100");
 		comicDTO.setNombre("Dragon Ball Yamcha");
 		comicDTO.setEditorial("Planeta Cómic");
-		comicDTO.setTematica("AVENTURAS");
+		comicDTO.setTematicaEnum(TematicaEnum.AVENTURAS);
 		comicDTO.setColeccion("Manga Shonen");
 		comicDTO.setNumeroPaginas(100);
 		comicDTO.setPrecio(new BigDecimal(2100));
 		comicDTO.setAutores("Dragon Garow Lee");
 		comicDTO.setColor(Boolean.FALSE);
 		comicDTO.setFechaVenta(LocalDate.now());
-		comicDTO.setEstado(EstadoEnum.ACTIVO);
+		comicDTO.setEstadoEnum(EstadoEnum.ACTIVO);
 		comicDTO.setCantidad(20L);
 		if (listaComics == null) {
 			listaComics = new ArrayList<ComicDTO>();
