@@ -118,4 +118,18 @@ public class AppTest {
 	public void agregarComicDTOLista() {
 		
 	}
+	
+	public static void probar() {
+		String s1 = "street";
+		String s2;
+		s2 = new String("street");
+		if(s1 == s2) {
+			System.out.println("entro");
+		}
+		System.out.println("no entro");
+	}
+	
+	public static void main(String[] args) {
+		AppTest.probar();
+	}
 }
