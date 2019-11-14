@@ -76,7 +76,7 @@
                 <span></span>
             </div>
             <div class="col-6 text-right">
-                <button type="button" class="btn btn-primary" (click)="crearActualizarComic()">Crear/Editar</button>
+                <button type="button" class="btn btn-primary" (click)="crearActualizarComic1()">{{textoBoton}}</button>
             </div>
         </div>
 
@@ -106,7 +106,7 @@
                             <td>{{comic.color ? 'Si' : 'No' }}</td>
                             <td>
                                 <i class="fas fa-search 2x ml-1" [routerLink]="['/consultar-comic',comic]" title="Consultar"></i>
-                                <i class="fas fa-pencil-alt 2x ml-1" (click)="editarComic(comic)" title="Editar"></i>
+                                <i class="fas fa-pencil-alt 2x ml-1" (click)="mostrarComicParaEditar(comic)" title="Editar"></i>
                                 <i class="far fa-times-circle 2x ml-1" (click)="eliminarComic(i)" title="Eliminar"></i>
                             </td>
                         </tr>
@@ -115,10 +115,4 @@
             </div>
         </div>
     </form>
-    <div #alert class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-    </div>
 </div>

@@ -3,7 +3,8 @@ import { ComicDTO } from '../../dto/comic.dto';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 /**
  * @description Componenete gestionar comic, el cual contiene la logica CRUD
@@ -17,7 +18,6 @@ import { Router } from '@angular/router';
 })
 export class GestionarComicComponent implements OnInit {
 
-    @ViewChild('alert', { static: true }) alert: ElementRef;
 
     /**
      * Atributo que contiene los controles del formulario
@@ -42,6 +42,11 @@ export class GestionarComicComponent implements OnInit {
     public submitted : boolean;
 
     /**
+     * Atributo que indica el texto del boton del formulario editar o crear
+     */
+    public textoBoton: string;
+
+    /**
      * @description Este es el constructor del componente GestionarComicComponent
      * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
      */
@@ -57,6 +62,7 @@ export class GestionarComicComponent implements OnInit {
                 autores : [null],
                 color : [null]
             });
+        this.textoBoton ="Crear";
     }
 
     /**
@@ -90,7 +96,84 @@ export class GestionarComicComponent implements OnInit {
         this.comic.color = this.gestionarComicForm.controls.color.value;
         this.listaComics.push(this.comic);
         this.limpiarFormulario();
+    
+}
+
+
+ /**
+     * variable que establece si se esta editando un comic o no
+     */
+    public editando: boolean;
+
+    /**
+     *  id del comic que se esta editando 
+     */
+    public idComicToEdit: number;
+    /**
+     * Atributo que indica si se envio a validar el formulario
+     */
+
+     /**
+     * @description Metodo que permite validar el formulario y crear o actulizar un comic
+     */
+    public crearActualizarComic1(): void {
+        this.submitted = true;
+        if (this.gestionarComicForm.invalid) {
+            return;
+        } 
+        this.comic = new ComicDTO();
+        this.comic.nombre = this.gestionarComicForm.controls.nombre.value;
+        this.comic.editorial = this.gestionarComicForm.controls.editorial.value;
+        this.comic.tematica = this.gestionarComicForm.controls.tematica.value;
+        this.comic.coleccion = this.gestionarComicForm.controls.coleccion.value;
+        this.comic.numeroPaginas = this.gestionarComicForm.controls.numeroPaginas.value;
+        this.comic.precio = this.gestionarComicForm.controls.precio.value;
+        this.comic.autores = this.gestionarComicForm.controls.autores.value;
+        this.comic.color = this.gestionarComicForm.controls.color.value;
+        this.limpiarFormulario();
+        if (!this.editando) {
+            this.idComic++;
+            this.comic.id = this.idComic.toString();
+            this.listaComics.push(this.comic);
+        } else {
+           this.editarComic();
+        }
     }
+
+    /**
+     * Metodo encargado de editar un comic de la lista de comics
+     */
+    public editarComic():void{
+        for(let i = 0; i < this.listaComics.length; i++){
+            if(this.listaComics[i].id == this.idComicToEdit.toString()){
+                this.comic.id = this.idComicToEdit.toString();
+                this.listaComics[i] = this.comic;
+                break;
+            }
+        }
+        this.editando = false;
+        this.textoBoton = "Crear";
+    }
+
+    /**
+     * Muestra el comic seleccionado en el formulario para su edición
+     * @param comic 
+     */
+    public mostrarComicParaEditar(comic: any): void {
+        this.idComicToEdit = comic.id;
+        this.gestionarComicForm.controls.nombre.setValue(comic.nombre);
+        this.gestionarComicForm.controls.editorial.setValue(comic.editorial);
+        this.gestionarComicForm.controls.tematica.setValue(comic.tematica);
+        this.gestionarComicForm.controls.coleccion.setValue(comic.coleccion);
+        this.gestionarComicForm.controls.numeroPaginas.setValue(comic.numeroPaginas);
+        this.gestionarComicForm.controls.precio.setValue(comic.precio);
+        this.gestionarComicForm.controls.autores.setValue(comic.autores);
+        this.gestionarComicForm.controls.color.setValue(comic.color);
+        this.editando = true;
+        this.textoBoton = "Editar";
+    }
+
+
 
     /**
      * Metodo que permite consultar un comic de la tabla y sus detalles e inhabilitar el formulario
@@ -114,22 +197,8 @@ export class GestionarComicComponent implements OnInit {
         this.gestionarComicForm.controls.precio.disable();
         this.gestionarComicForm.controls.autores.disable();
         this.gestionarComicForm.controls.color.disable();
-//        this.gestionarComicForm.controls.color.enable(); para habilitar el campo
     }
 
-    public editarComic(comic : ComicDTO) : void {
-     //   this.router.navigate(['bienvenida',comic]);
-      //  let comic = this.listaComics[posicion];
-        this.gestionarComicForm.controls.nombre.setValue(comic.nombre);
-        this.gestionarComicForm.controls.editorial.setValue(comic.editorial);
-        this.gestionarComicForm.controls.tematica.setValue(comic.tematica);
-        this.gestionarComicForm.controls.coleccion.setValue(comic.coleccion);
-        this.gestionarComicForm.controls.numeroPaginas.setValue(comic.numeroPaginas);
-        this.gestionarComicForm.controls.precio.setValue(comic.precio);
-        this.gestionarComicForm.controls.autores.setValue(comic.autores);
-        this.gestionarComicForm.controls.color.setValue(comic.color);
-       
-    }
 
     /**
      * @description Metodo que elimina un comic de la lista 
@@ -137,7 +206,13 @@ export class GestionarComicComponent implements OnInit {
      */
     public eliminarComic(posicion: number){
         this.listaComics.splice(posicion,1);
-        this.alert.nativeElement.classList.remove('show');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Comic eliminado!',
+            showConfirmButton: false,
+            timer: 1500
+          })
     }
 
     private limpiarFormulario() : void {
