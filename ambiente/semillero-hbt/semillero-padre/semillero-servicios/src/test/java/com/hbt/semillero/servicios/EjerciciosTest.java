@@ -3,6 +3,9 @@
  */
 package com.hbt.semillero.servicios;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -51,15 +54,38 @@ public class EjerciciosTest {
 		Assert.assertEquals(EjerciciosPOJO.esPrimo(numero3), false ); //0 no es primo
 	}
 	
+
 	/**
 	 * 
-	 * Metodo encargado de probar el metodo 
+	 * Metodo encargado de probar el metodo de probar años
 	 * <b>Caso de Uso</b>
 	 * @author Yuliana
 	 *
 	 */
 	@Test
 	public void ejercicio4() {
+		Assert.assertEquals( EjerciciosPOJO.validarAnio(LocalDate.of(2011, 1, 1), 19), LocalDate.now().getYear()); //5 es primo
+	}
+	
+	/**
+	 * 
+	 * Metodo encargado de probar el metodo del ejercio 5 
+	 * ordenar numeros
+	 * <b>Caso de Uso</b>
+	 * @author Yuliana
+	 *
+	 */
+	@Test
+	public void ejercicio5() {
+		EjerciciosPOJO.ingresarValor(-2);
+		EjerciciosPOJO.ingresarValor(1);
+		EjerciciosPOJO.ingresarValor(50);
+		EjerciciosPOJO.ingresarValor(249);
 		
+		EjerciciosPOJO.ordenarNumeros();
+		
+		Assert.assertEquals(EjerciciosPOJO.obtenerListNumeros().get(0), new Integer(-2));
+		Assert.assertEquals(EjerciciosPOJO.obtenerListNumeros().get(3), new Integer(249));
+		Assert.assertEquals(EjerciciosPOJO.obtenerListNumeros().size(),4);
 	}
 }

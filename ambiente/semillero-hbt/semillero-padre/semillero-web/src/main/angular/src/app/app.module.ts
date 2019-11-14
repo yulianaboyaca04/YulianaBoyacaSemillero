@@ -14,6 +14,7 @@ import { CrearPersonaComponent } from './semillero/componentes/crearPersona/crea
 import { GestionarComicComponent } from './semillero/componentes/gestionarComic/gestionar-comic';
 import { ConsultarComicComponent } from './semillero/componentes/consultarComic/consultar-comic.component';
 
+
 // DTOs
 export { ComicDTO } from './semillero/dto/comic.dto';
 export { ResultadoDTO } from './semillero/dto/resultado.dto';
@@ -36,7 +37,7 @@ export { ResultadoDTO } from './semillero/dto/resultado.dto';
     ReactiveFormsModule
   ],
   providers: [
-  	{ provide: APP_BASE_HREF, useValue: '/SemilleroHBT' }
+    { provide: APP_BASE_HREF, useValue: '/SemilleroHBT' }
   ],
   bootstrap: [AppComponent]
 })
