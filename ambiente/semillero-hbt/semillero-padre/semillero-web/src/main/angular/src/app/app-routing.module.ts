@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'gestionar-comic', component: GestionarComicComponent },
   { path: 'bienvenida', component: BienvenidaComponent, data : null },
   { path: 'consultar-comic', component: ConsultarComicComponent, data : null }
-  
 ];
 
 @NgModule({

@@ -101,12 +101,12 @@ export class GestionarComicComponent implements OnInit {
 
 
  /**
-     * variable que establece si se esta editando un comic o no
+     * variable que establece si se esta isEdit un comic o no
      */
-    public editando: boolean;
+    public isEdit: boolean;
 
     /**
-     *  id del comic que se esta editando 
+     *  id del comic que se esta isEdit 
      */
     public idComicToEdit: number;
     /**
@@ -131,7 +131,7 @@ export class GestionarComicComponent implements OnInit {
         this.comic.autores = this.gestionarComicForm.controls.autores.value;
         this.comic.color = this.gestionarComicForm.controls.color.value;
         this.limpiarFormulario();
-        if (!this.editando) {
+        if (!this.isEdit) {
             this.idComic++;
             this.comic.id = this.idComic.toString();
             this.listaComics.push(this.comic);
@@ -151,7 +151,7 @@ export class GestionarComicComponent implements OnInit {
                 break;
             }
         }
-        this.editando = false;
+        this.isEdit = false;
         this.textoBoton = "Crear";
     }
 
@@ -169,7 +169,7 @@ export class GestionarComicComponent implements OnInit {
         this.gestionarComicForm.controls.precio.setValue(comic.precio);
         this.gestionarComicForm.controls.autores.setValue(comic.autores);
         this.gestionarComicForm.controls.color.setValue(comic.color);
-        this.editando = true;
+        this.isEdit = true;
         this.textoBoton = "Editar";
     }
 
@@ -215,6 +215,9 @@ export class GestionarComicComponent implements OnInit {
           })
     }
 
+    /**
+     * metodo que limpia el formulario
+     */
     private limpiarFormulario() : void {
         this.submitted = false;
         this.gestionarComicForm.controls.nombre.setValue(null);
