@@ -128,7 +128,6 @@ public class GestionarComicRest {
 	public void eliminarComic(@QueryParam("idComic") Long idComic) {
 		if (idComic != null) {
 			ComicDTO comicDTO = gestionarComicEJB.consultarComic(idComic.toString());
-
 		}
 	}
 	

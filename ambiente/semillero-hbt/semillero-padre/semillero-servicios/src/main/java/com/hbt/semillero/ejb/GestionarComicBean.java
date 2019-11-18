@@ -53,7 +53,7 @@ public class GestionarComicBean implements IGestionarComicLocal{
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void modificarComic(ComicDTO comicModificar) {
 		Comic comic= new Comic();
-		comic.setId(comicModificar.getId());
+		comic.setId(Long.parseLong(comicModificar.getId()));
 		em.merge(comicModificar);
 	}
 	
@@ -68,7 +68,9 @@ public class GestionarComicBean implements IGestionarComicLocal{
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public ComicDTO consultarComic(String idComic) {
-		Comic comic = em.find(Comic.class, idComic);
+		Comic comic = null;
+		comic = new Comic();
+		comic = em.find(Comic.class, Long.parseLong(idComic));
 		ComicDTO comicDTO = convertirComicToComicDTO(comic);
 		return comicDTO;
 	}
@@ -142,9 +144,9 @@ public class GestionarComicBean implements IGestionarComicLocal{
 	 */
 	private Comic convertirComicDTOToComic(ComicDTO comicDTO) {
 		Comic comic = new Comic();
-        if(comicDTO.getId()!=null) {
-            comic.setId(comicDTO.getId());
-        }
+		if(comicDTO.getId()!=null) {
+			comic.setId(Long.parseLong(comicDTO.getId()));
+		}
         comic.setNombre(comicDTO.getNombre());
         comic.setEditorial(comicDTO.getEditorial());
         comic.setTematicaEnum(comicDTO.getTematica());

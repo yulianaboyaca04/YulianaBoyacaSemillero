@@ -1,6 +1,6 @@
 
 import { ComicDTO } from '../../dto/comic.dto';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ɵConsole } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -107,11 +107,18 @@ export class GestionarComicComponent implements OnInit {
         this.comic.precio = this.gestionarComicForm.controls.precio.value;
         this.comic.autores = this.gestionarComicForm.controls.autores.value;
         this.comic.color = this.gestionarComicForm.controls.color.value;
+        this.comic.cantidad = 12;
         this.limpiarFormulario();
         if (!this.isEdit) {
             this.idComic++;
-            this.comic.id = this.idComic.toString();
-            this.listaComics.push(this.comic);
+            this.gestionarComicService.crearComic(this.comic).subscribe(resultadoDTO => {
+                if (resultadoDTO.exitoso) {
+                    this.consultarComics();
+                    this.limpiarFormulario();
+                }
+            }, error => {
+                console.log(error);
+            });
         } else {
             this.editarComic();
         }

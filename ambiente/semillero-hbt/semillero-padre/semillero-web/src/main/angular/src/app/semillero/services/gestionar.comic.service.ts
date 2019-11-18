@@ -45,6 +45,6 @@ export class GestionarComicService extends AbstractService {
    * @param comicDTO contiene la informacion del comic a persistir
    */
   public modificarComic(idComic:number, nombre: string) {
-    //return this.http.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/modificar', idComic);
+    return this.httpClient.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/modificar', idComic);
   }
 }
