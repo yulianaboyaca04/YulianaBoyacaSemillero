@@ -1,5 +1,5 @@
 /**
- * GestionarComicPOJO.java
+c * GestionarComicPOJO.java
  */
 package com.hbt.semillero.pojo;
 

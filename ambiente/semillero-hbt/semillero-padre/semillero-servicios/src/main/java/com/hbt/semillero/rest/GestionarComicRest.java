@@ -125,10 +125,16 @@ public class GestionarComicRest {
 	@POST
 	@Path("/eliminar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void eliminarComic(@QueryParam("idComic") Long idComic) {
+	public ResultadoDTO eliminarComic(@QueryParam("idComic") Long idComic) {
+		ResultadoDTO resultadoDTO;
 		if (idComic != null) {
 			ComicDTO comicDTO = gestionarComicEJB.consultarComic(idComic.toString());
+			gestionarComicEJB.eliminarComic(Long.parseLong(comicDTO.getId()));
+			resultadoDTO = new ResultadoDTO(Boolean.TRUE, "Comic eliminado exitosamente");
+		}else {
+			resultadoDTO = new ResultadoDTO(Boolean.FALSE, "Error al eliminar comic");
 		}
+		return resultadoDTO;
 	}
 	
 }

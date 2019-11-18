@@ -108,7 +108,6 @@ export class GestionarComicComponent implements OnInit {
         this.comic.autores = this.gestionarComicForm.controls.autores.value;
         this.comic.color = this.gestionarComicForm.controls.color.value;
         this.comic.cantidad = 12;
-        this.limpiarFormulario();
         if (!this.isEdit) {
             this.idComic++;
             this.gestionarComicService.crearComic(this.comic).subscribe(resultadoDTO => {
@@ -186,15 +185,31 @@ export class GestionarComicComponent implements OnInit {
      * @description Metodo que elimina un comic de la lista 
      * @author Mary Yuliana Boyacá <mary.boyaca@uptc.edu.co>
      */
-    public eliminarComic(posicion: number) {
-        this.listaComics.splice(posicion, 1);
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Comic eliminado!',
-            showConfirmButton: false,
-            timer: 1500
-        })
+    public eliminarComic(comic: ComicDTO) {
+      //  this.listaComics.splice(posicion, 1);
+        this.gestionarComicService.eliminarComic(Number(comic.id)).subscribe(resultadoDTO => {
+            if (resultadoDTO.exitoso) {
+                this.consultarComics();
+                this.limpiarFormulario();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Comic eliminado exitosamente!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Comic eliminado exitosamente!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }, error => {
+            console.log(error);
+        });
     }
 
     /**

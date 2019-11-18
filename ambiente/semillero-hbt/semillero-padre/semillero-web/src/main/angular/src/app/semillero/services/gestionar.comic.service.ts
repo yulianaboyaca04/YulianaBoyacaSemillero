@@ -18,10 +18,10 @@ export class GestionarComicService extends AbstractService {
   /**
    * Constructor de la clase
    */
-  constructor(injector: Injector, private httpClient : HttpClient) {
+  constructor(injector: Injector, private httpClient: HttpClient) {
     super(injector);
   }
-  
+
   /**
    * @description Metodo encargado de invocar el servicio REST consultar comics
    * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
@@ -35,16 +35,26 @@ export class GestionarComicService extends AbstractService {
    * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
    * @param comicDTO contiene la informacion del comic a persistir
    */
-  public crearComic(comicDTO : ComicDTO): Observable<any> {
-    return this.httpClient.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/crear',comicDTO);
+  public crearComic(comicDTO: ComicDTO): Observable<any> {
+    return this.httpClient.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/crear', comicDTO);
   }
 
   /**
-   * @description Metodo encargado de invocar el servicio REST crear comic
-   * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
-   * @param comicDTO contiene la informacion del comic a persistir
+ * @description Metodo encargado de eliminar un comic mediante el id
+ * @author Mary Yuliana Boyaca <mary.boyaca@uptc.edu.co>
+ * @param idComic 
+ */
+  public eliminarComic(idComic: number): Observable<any> {
+    return this.httpClient.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/eliminar', { "idComic": idComic});
+  }
+
+  /**
+   * @description Metodo encargado de modificar el nombre del comic mediante el id
+   * @author Mary Yuliana Boyaca <mary.boyaca@uptc.edu.co>
+   * @param idComic 
+   * @param nombre 
    */
-  public modificarComic(idComic:number, nombre: string) {
-    return this.httpClient.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/modificar', idComic);
+  public modificarComic(idComic: number, nombre: string): Observable<any> {
+    return this.httpClient.post('http://localhost:8085/semillero-servicios/rest/GestionarComic/modificar', { "idComic": idComic, "nombre": nombre });
   }
 }

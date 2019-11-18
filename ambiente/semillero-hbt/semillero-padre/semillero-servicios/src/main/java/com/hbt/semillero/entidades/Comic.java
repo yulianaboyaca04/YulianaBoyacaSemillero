@@ -18,7 +18,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * <b>Descripción:<b> Clase que determina <b>Caso de Uso:<b>
+ * <b>Descripción:<b> Clase que determina
+ *  <b>Caso de Uso:<b>
  * 
  * @author Yuliana
  * @version
