@@ -44,6 +44,14 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['bienvenida']);
   }
 
+    /**
+   * @description Metodo encargado de direccionar al componente de gestionar usuario
+   * @author Mary Yuliana Boyacá Aguilar <mary.boyaca@uptc.edu.co>
+   */
+  public navegarGestionarUsuario(): void {
+    this.router.navigate(['gestionar-usuario']);
+  }
+
   public navegarGestionarCompra(): void {
     //WIP
   }

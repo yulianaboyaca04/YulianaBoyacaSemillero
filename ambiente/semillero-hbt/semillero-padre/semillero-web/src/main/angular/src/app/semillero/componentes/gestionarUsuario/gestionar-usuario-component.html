@@ -1,0 +1,80 @@
+<div class="container">
+    <form [formGroup]="gestionarUsuarioForm">
+        <h1>Gestionar usuario</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="nombrePersona">Nombre Persona:</label>
+                <input type="text" class="form-control" id="nombrePersona" formControlName="nombre">
+            </div>
+
+            <div class="col-6">
+                <label for="numPersona">Numero de identificación:</label>
+                <input type="number" class="form-control" id="numPersona" formControlName="numIdentificacion">
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-6">
+                <span></span>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary" (click)="crearUsuarioDePersona()">Crear</button>
+            </div>
+        </div>
+
+        <div class="row" [hidden]="listaUsuarios.length === 0">
+            <h2>Persona</h2>
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Numero Identificacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let persona of listaPersonas;let i=index;">
+                            <th scope="row">{{persona.id}}</th>
+                            <td>{{persona.nombre}}</td>
+                            <td>{{persona.numIdentificacion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" [hidden]="listaUsuarios.length === 0 || listaUsuarios == undefined">
+            <h2>Usuarios</h2>
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Fecha Creacion</th>
+                            <th scope="col">estado</th>
+                            <th scope="col">idPersona</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of listaUsuarios;let i=index;">
+                            <th scope="row">{{usuario.id}}</th>
+                            <td>{{usuario.nombre}}</td>
+                            <td>{{usuario.fechaCreacion}}</td>
+                            <td>{{usuario.Estado}}</td>
+                            <td>{{usuario.idPersona}}</td>
+                            <td>
+                                <i class="fas fa-search 2x ml-1" [routerLink]="['/consultar-usuario',usuario]" title="Consultar"></i>
+                                <i class="far fa-times-circle 2x ml-1" (click)="eliminarUsuario(usuario.id)" title="Eliminar"></i>
+                                <!-- </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+    <form [formGroup]="gestionarUsuarioForm">
+        <h1>Consultar Usuario</h1>
+        <hr>
+        <div class="row ">
+            <div class="col-3">
+                <button class="btn btn-primary" (click)="habilitarFormularioParaEditar()">Habilitar campos para editar</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre">
+            </div>
+
+            <div class="col-6">
+                <label for="fechaCreacion">Fecha creacion:</label>
+                <input type="text" class="form-control" id="fechaCreacion" formControlName="fechaCreacion">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="estado">Estado:</label>
+                <input type="text" class="form-control" id="estado" formControlName="estado">
+            </div>
+            <div class="col-6">
+                <label for="idPersona">idPersona:</label>
+                <input type="text" class="form-control" id="idPersona" formControlName="idPersona">
+            </div>
+        </div>
+        <br>
+        <div class="row" *ngIf="editando">
+            <div class="col-6">
+                <span></span>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary" (click)="editar()">Editar usuario</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <span></span>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary" (click)="volver()">Volver</button>
+            </div>
+        </div>
+        <br>
+    </form>
+</div>

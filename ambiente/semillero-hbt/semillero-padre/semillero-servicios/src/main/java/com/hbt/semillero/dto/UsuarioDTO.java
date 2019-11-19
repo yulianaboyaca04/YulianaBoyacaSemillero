@@ -20,11 +20,11 @@ public class UsuarioDTO implements Serializable{
 	 * Atributo que determina  
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private Long id;
 	private String nombre;
 	private LocalDate fehaCreacion;
 	private EstadoPersonaEnum estado;
-	private String idPersona;
+	private Long idPersona;
 	
 	/**
 	 * Constructor de la clase.
@@ -41,7 +41,7 @@ public class UsuarioDTO implements Serializable{
 	 * @param estado
 	 * @param idPersona
 	 */
-	public UsuarioDTO(String id, String nombre, LocalDate fehaCreacion, EstadoPersonaEnum estado, String idPersona) {
+	public UsuarioDTO(Long id, String nombre, LocalDate fehaCreacion, EstadoPersonaEnum estado, Long idPersona) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -53,14 +53,14 @@ public class UsuarioDTO implements Serializable{
 	 * Metodo encargado de retornar el valor del atributo id
 	 * @return El id asociado a la clase
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * Metodo encargado de modificar el valor del atributo id
 	 * @param id El nuevo id a modificar.
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
@@ -109,14 +109,14 @@ public class UsuarioDTO implements Serializable{
 	 * Metodo encargado de retornar el valor del atributo idPersona
 	 * @return El idPersona asociado a la clase
 	 */
-	public String getIdPersona() {
+	public Long getIdPersona() {
 		return idPersona;
 	}
 	/**
 	 * Metodo encargado de modificar el valor del atributo idPersona
 	 * @param idPersona El nuevo idPersona a modificar.
 	 */
-	public void setIdPersona(String idPersona) {
+	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
 	}
 	/**

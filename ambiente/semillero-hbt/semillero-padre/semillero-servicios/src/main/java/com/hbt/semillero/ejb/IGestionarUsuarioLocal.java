@@ -5,6 +5,7 @@ package com.hbt.semillero.ejb;
 
 import java.util.List;
 
+import com.hbt.semillero.dto.PersonaDTO;
 import com.hbt.semillero.dto.UsuarioDTO;
 
 /**
@@ -17,13 +18,47 @@ public interface IGestionarUsuarioLocal {
 
 	/**
 	 * 
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author Yuliana
+	 * 
+	 * @param personaDTO
+	 */
+	public void crearPersona(PersonaDTO personaDTO);
+
+	/**
+	 * 
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author Yuliana
+	 * 
+	 * @return
+	 */
+	public List<PersonaDTO> consultarPersonas() ;
+
+	/**
+	 * 
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author Yuliana
+	 * 
+	 * @param idPersona
+	 * @return
+	 */
+	public PersonaDTO consultarPersona(Long idPersona) ;
+	
+	
+	/**
+	 * 
 	 * Metodo encargado de crear un usuario y persistirlo
 	 * <b>Caso de Uso</b>
 	 * @author Yuliana
 	 * 
 	 * @param usuarioNuevo
+	 * @throws Exception 
+	 * 
 	 */
-	public void crearUsuario(UsuarioDTO usuarioNuevo);
+	public void crearUsuario(UsuarioDTO usuarioNuevo) throws Exception;
 	
 	
 	/**
@@ -63,4 +98,14 @@ public interface IGestionarUsuarioLocal {
 	 * @return
 	 */
 	public List<UsuarioDTO> consultarUsuarios();
+	
+	/**
+	 * 
+	 * Metodo encargado de validar si un usuario esta activo de acuerdo a su fecha de creacion
+	 * <b>Caso de Uso</b>
+	 * @author Yuliana
+	 * 
+	 * @return
+	 */
+	public boolean validarUsuarioActivo(Long idUsuario);
 }

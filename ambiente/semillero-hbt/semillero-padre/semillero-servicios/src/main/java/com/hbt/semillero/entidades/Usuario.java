@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -112,8 +113,8 @@ public class Usuario implements Serializable {
 	 * Metodo encargado de retornar el valor del atributo idPersona
 	 * @return El idPersona asociado a la clase
 	 */
-	@Column(name = "SUIDPERSONA")
 	@OneToOne
+	@JoinColumn(name = "SUIDPERSONA")
 	public Persona getPersona() {
 		return persona;
 	}

@@ -16,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.hbt.semillero.dto.ComicDTO;
+import com.hbt.semillero.dto.PersonaDTO;
 import com.hbt.semillero.dto.ResultadoDTO;
 import com.hbt.semillero.dto.UsuarioDTO;
 import com.hbt.semillero.ejb.IGestionarUsuarioLocal;
@@ -35,6 +36,43 @@ public class GestionarUsuarioRest {
 	@EJB
 	private IGestionarUsuarioLocal gestionarUsuarioEJB;
 
+
+	/**
+	 * 
+	 * Metodo encargado de consultar personas
+	 *  <b>Caso de Uso</b>
+	 * 
+	 * @author Yuliana
+	 * 
+	 * @return
+	 */
+	@GET
+	@Path("/consultarPersonas")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<PersonaDTO> consultarPersonas() {
+		return gestionarUsuarioEJB.consultarPersonas();
+	}
+
+	/**
+	 * 
+	 * Metodo encargado de de ser el servicio que consulta una persona deacuerdo a un id en especifico
+	 * <b>Caso de Uso</b>
+	 *
+	 * @param idPersona
+	 * @return
+	 */
+	@GET
+	@Path("/consultarPersona")
+	@Produces(MediaType.APPLICATION_JSON)
+	public PersonaDTO consultarPersona(@QueryParam("idPersona") Long idPersona) {
+		if (idPersona != null) {
+			PersonaDTO personaDTO = gestionarUsuarioEJB.consultarPersona(idPersona);
+			return personaDTO;
+		}
+		return null;
+	}
+
+	
 	/**
 	 * 
 	 * Metodo encargado de traer la informacion de todos los usuarios
@@ -70,7 +108,7 @@ public class GestionarUsuarioRest {
 	}
 	
 	/**
-	 * Servicio encargado de crear un usuario 
+	 * Servicio encargado de crear una persona con su respectivo usuario
 	 * http://localhost:8085/semillero-servicios/rest/GestionarUsuario/crearUsuario
 	 * @param persona
 	 * @return
@@ -79,11 +117,16 @@ public class GestionarUsuarioRest {
 	@Path("/crearUsuario")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultadoDTO crearUsuario(UsuarioDTO usuarioDTO) {
+	public ResultadoDTO crearUsuario(PersonaDTO personaDTO) {
+		try {
+		gestionarUsuarioEJB.crearPersona(personaDTO);
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setIdPersona(personaDTO.getId());
 		gestionarUsuarioEJB.crearUsuario(usuarioDTO);
-		ResultadoDTO resultadoDTO = new ResultadoDTO(Boolean.TRUE, "Usuario creado exitosamente");
-		return resultadoDTO;
-		
+		return new ResultadoDTO(Boolean.TRUE, "Usuario creado exitosamente!"); 
+		}catch(Exception e) {
+			return new ResultadoDTO(Boolean.FALSE, "La fecha de creacion del usuario excede la fecha actual");
+		}
 	}
 
 	/**
@@ -113,7 +156,7 @@ public class GestionarUsuarioRest {
 		ResultadoDTO resultadoDTO;
 		if (idUsuario != null) {
 			UsuarioDTO usuarioDTO = gestionarUsuarioEJB.consultarUsuario(idUsuario.toString());
-			gestionarUsuarioEJB.eliminarUsuario(Long.parseLong(usuarioDTO.getId()));
+			gestionarUsuarioEJB.eliminarUsuario(usuarioDTO.getId());
 			resultadoDTO = new ResultadoDTO(Boolean.TRUE, "Usuario eliminado exitosamente");
 		}else {
 			resultadoDTO = new ResultadoDTO(Boolean.FALSE, "Error al eliminar usuario");
